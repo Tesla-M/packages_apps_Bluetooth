@@ -54,6 +54,7 @@ import android.os.Process;
 import android.os.SystemProperties;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Profile;
+import android.provider.Settings;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
@@ -257,6 +258,8 @@ public class BluetoothOppObexServerSession extends ServerRequestHandler implemen
         }
         boolean isWhitelisted = BluetoothOppManager.getInstance(mContext).
                 isWhitelisted(destination);
+        boolean isAcceptAllFilesEnabled = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.BLUETOOTH_ACCEPT_ALL_FILES, 0) == 1;
 
         try {
             boolean pre_reject = false;
